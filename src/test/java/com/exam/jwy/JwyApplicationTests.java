@@ -93,4 +93,4 @@ class JwyApplicationTests {
 				.forEach(System.out::println);
 	}
 
-}
+	}
