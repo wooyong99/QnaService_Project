@@ -92,5 +92,8 @@ class JwyApplicationTests {
 				.map(a -> "id : "+a.getId()+" subject : "+a.getSubject())
 				.forEach(System.out::println);
 	}
-
+	@Test
+	void testJpa8(){
+		questionRepository.truncate();
+	}
 	}

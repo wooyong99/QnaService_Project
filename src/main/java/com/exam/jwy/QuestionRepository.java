@@ -1,6 +1,9 @@
 package com.exam.jwy;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
@@ -13,4 +16,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
   List<Question> findByIdLessThan(int id);
 
   List<Question> findByIdGreaterThan(int id);
+  @Transactional
+  @Modifying
+  @Query(value="truncate table question", nativeQuery = true)
+  void truncate();
 }
