@@ -20,4 +20,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
   @Modifying
   @Query(value="truncate table question", nativeQuery = true)
   void truncate();
+
+  List<Question> findBySubjectOrderById(String subject);
+
+  List<Question> findBySubjectOrderByIdDesc(String subject);
 }
