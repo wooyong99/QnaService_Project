@@ -24,4 +24,12 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
   List<Question> findBySubjectOrderById(String subject);
 
   List<Question> findBySubjectOrderByIdDesc(String subject);
+  @Transactional
+  @Modifying
+  @Query(value="SET FOREIGN_KEY_CHECKS = 1;", nativeQuery = true)
+  void enableForeignKeyCheck();
+  @Transactional
+  @Modifying
+  @Query(value="SET FOREIGN_KEY_CHECKS = 0;", nativeQuery = true)
+  void disableForeignKeyCheck();
 }

@@ -20,10 +20,10 @@ class JwyApplicationTests {
 
 	@BeforeEach
 	void testJpa0(){
-		questionRepository.truncate();
+		clearData();
+		createData();
 	}
-	@Test
-	void testJpa1(){
+	void createData(){
 		Question q1 = new Question();
 		q1.setSubject("제목1");
 		q1.setContent("내용1");
@@ -39,15 +39,20 @@ class JwyApplicationTests {
 		assertThat(q1.getId()).isGreaterThan(0);
 		assertThat(q2.getId()).isGreaterThan(q1.getId());
 	}
+	void clearData(){
+		questionRepository.disableForeignKeyCheck();
+		questionRepository.truncate();
+		questionRepository.enableForeignKeyCheck();
+	}
 	@Test
-	void testJpa2(){
+	void testJpa1(){
 		List<Question> qlist = questionRepository.findBySubjectLike("제목%");
 		qlist.stream()
 				.map(a -> "제목 : "+a.getSubject()+" / 내용 : "+ a.getContent())
 				.forEach(System.out::println);
 	}
 	@Test
-	void testJpa3(){
+	void testJpa2(){
 		Question q1 = questionRepository.findBySubject("제목1");
 		q1.setSubject("제목1변경");
 		questionRepository.save(q1);
@@ -64,17 +69,24 @@ class JwyApplicationTests {
 				.forEach(System.out::println);
 	}
 	@Test
-	void testJpa4(){
-		List<Question> qlist = questionRepository.findBySubjectOrderByIdDesc("제목3");
-		qlist.stream()
-				.map(a -> a.getId())
-				.forEach(System.out::println);
+	void testJps3(){
+		Question q = questionRepository.findById(1).get();
+		questionRepository.delete(q);
+		List<Question> qlist = questionRepository.findAll();
+		System.out.println(qlist.size());
 	}
 	@Test
-	void testJpa5(){
-		List<Question> qlist = questionRepository.findBySubjectOrderById("제목3");
-		qlist.stream()
-				.map(a -> a.getId())
-				.forEach(System.out::println);
+	void testJps4(){
+		createData();
+		Question q1 = new Question();
+		q1.setSubject("제목3");
+		q1.setContent("내용3");
+		q1.setCreateDate(LocalDateTime.now());
+		questionRepository.save(q1);
+
+		Question q2 = questionRepository.findById(1).get();
+		questionRepository.delete(q2);
+		List<Question> qlist = questionRepository.findAll();
+		System.out.println(qlist.size());
 	}
 	}
