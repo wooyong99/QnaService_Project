@@ -24,6 +24,9 @@ class QuestionRepositoryTest {
 		createData();
 	}
 	void createData(){
+		createData(questionRepository);
+	}
+	static void createData(QuestionRepository questionRepository){
 		Question q1 = new Question();
 		q1.setSubject("제목1");
 		q1.setContent("내용1");
@@ -40,6 +43,9 @@ class QuestionRepositoryTest {
 		assertThat(q2.getId()).isGreaterThan(q1.getId());
 	}
 	void clearData(){
+		clearData(questionRepository);
+	}
+	static void clearData(QuestionRepository questionRepository){
 		questionRepository.disableForeignKeyCheck();
 		questionRepository.truncate();
 		questionRepository.enableForeignKeyCheck();
