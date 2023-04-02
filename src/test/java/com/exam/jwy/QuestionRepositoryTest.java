@@ -46,9 +46,7 @@ class QuestionRepositoryTest {
 		clearData(questionRepository);
 	}
 	static void clearData(QuestionRepository questionRepository){
-		questionRepository.disableForeignKeyCheck();
-		questionRepository.truncate();
-		questionRepository.enableForeignKeyCheck();
+		questionRepository.truncateTable();
 	}
 	@Test
 	void testJpa1(){

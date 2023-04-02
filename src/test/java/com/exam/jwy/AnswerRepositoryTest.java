@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
 public class AnswerRepositoryTest {
   @Autowired
@@ -17,19 +19,21 @@ public class AnswerRepositoryTest {
   @BeforeEach
   void beforeTest(){
     clearData();
+    createData();
   }
 
   private void clearData() {
-    answerRepository.disableForeignKeyChecks();
-    answerRepository.truncate();
-    answerRepository.enableForeignKeyChecks();
+    QuestionRepositoryTest.clearData(questionRepository);
+
+    answerRepository.truncateTable();
   }
 
-  @Test
-  void test0(){
-    Question q1 = questionRepository.findById(3).get();
+  void createData(){
+    QuestionRepositoryTest.createData(questionRepository);
+
+    Question q1 = questionRepository.findById(1).get();
     Answer a1 = new Answer();
-    a1.setContent("2번질문내용");
+    a1.setContent("1번질문내용");
     a1.setCreateDate(LocalDateTime.now());
     a1.setQuestion(q1);
 
@@ -37,7 +41,7 @@ public class AnswerRepositoryTest {
 
     Question q2 = questionRepository.findById(2).get();
     Answer a2 = new Answer();
-    a2.setContent("질문내용");
+    a2.setContent("2번 질문내용");
     a2.setCreateDate(LocalDateTime.now());
     a2.setQuestion(q2);
 
@@ -45,8 +49,7 @@ public class AnswerRepositoryTest {
   }
   @Test
   void test1(){
-    answerRepository.disableForeignKeyChecks();
-    answerRepository.truncate();
-    answerRepository.enableForeignKeyChecks();
+    Answer a = answerRepository.findByContent("1번질문내용");
+    assertThat(a.getId()).isEqualTo(1);
   }
 }
