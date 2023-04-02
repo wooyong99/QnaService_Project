@@ -1,5 +1,6 @@
 package com.exam.jwy;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +55,11 @@ public class AnswerRepositoryTest {
     Answer a = answerRepository.findByContent("1번질문내용");
     assertThat(a.getId()).isEqualTo(1);
   }
-  @Test void test2(){
+  @Transactional
+  @Test
+  void test2(){
     Question q = questionRepository.findById(2).get();
     List<Answer> qlist = q.getAnswerList();
-    qlist.stream()
-        .map(a->a.getContent())
-        .forEach(System.out::println);
+    System.out.println("qlist : "+ qlist.size());
   }
 }
