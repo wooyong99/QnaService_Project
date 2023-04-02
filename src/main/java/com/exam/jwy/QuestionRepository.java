@@ -18,7 +18,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>, Re
   List<Question> findByIdGreaterThan(int id);
   @Transactional
   @Modifying
-  @Query(value="truncate table question", nativeQuery = true)
+  @Query(value="ALTER TABLE question AUTO_INCREMENT=1", nativeQuery = true)
   void truncate();
 
   List<Question> findBySubjectOrderById(String subject);

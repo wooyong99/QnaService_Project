@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface AnswerRepository extends JpaRepository<Answer, Integer>, RepositoryUtil {
   @Transactional
   @Modifying
-  @Query(value = "truncate answer", nativeQuery = true)
+  @Query(value = "ALTER TABLE answer AUTO_INCREMENT=1", nativeQuery = true)
   void truncate();
   Answer findByContent(String content);
 }
