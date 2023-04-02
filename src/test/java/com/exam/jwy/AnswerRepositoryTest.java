@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -52,5 +53,12 @@ public class AnswerRepositoryTest {
   void test1(){
     Answer a = answerRepository.findByContent("1번질문내용");
     assertThat(a.getId()).isEqualTo(1);
+  }
+  @Test void test2(){
+    Question q = questionRepository.findById(2).get();
+    List<Answer> qlist = q.getAnswerList();
+    qlist.stream()
+        .map(a->a.getContent())
+        .forEach(System.out::println);
   }
 }
