@@ -40,7 +40,6 @@ public class AnswerRepositoryTest {
     Answer a1 = new Answer();
     a1.setContent("1번질문내용");
     a1.setCreateDate(LocalDateTime.now());
-    a1.setQuestion(q1);
     q1.addAnswer(a1);
     answerRepository.save(a1);
 
@@ -48,7 +47,6 @@ public class AnswerRepositoryTest {
     Answer a2 = new Answer();
     a2.setContent("2번 질문내용");
     a2.setCreateDate(LocalDateTime.now());
-    a2.setQuestion(q1);
     q1.addAnswer(a2);
 
     answerRepository.save(a2);
