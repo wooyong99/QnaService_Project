@@ -41,15 +41,15 @@ public class AnswerRepositoryTest {
     a1.setContent("1번질문내용");
     a1.setCreateDate(LocalDateTime.now());
     q1.addAnswer(a1);
-    answerRepository.save(a1);
+//    answerRepository.save(a1);
 
     Question q2 = questionRepository.findById(2).get();
     Answer a2 = new Answer();
     a2.setContent("2번 질문내용");
     a2.setCreateDate(LocalDateTime.now());
     q1.addAnswer(a2);
-
-    answerRepository.save(a2);
+    questionRepository.save(q1);
+//    answerRepository.save(a2);
   }
   @Test
   @Transactional

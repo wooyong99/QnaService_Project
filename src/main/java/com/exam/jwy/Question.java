@@ -20,7 +20,7 @@ public class Question{
   @Column(columnDefinition = "TEXT")
   private String content;
   private LocalDateTime createDate;
-  @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+  @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
   private List<Answer> answerList = new ArrayList<>();
 
   public void addAnswer(Answer answer){
