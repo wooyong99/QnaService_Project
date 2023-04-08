@@ -1,5 +1,9 @@
 package com.exam.jwy;
 
+import com.exam.jwy.Answer.Answer;
+import com.exam.jwy.Answer.AnswerRepository;
+import com.exam.jwy.Question.Question;
+import com.exam.jwy.Question.QuestionRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

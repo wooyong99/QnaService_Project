@@ -1,5 +1,6 @@
-package com.exam.jwy;
+package com.exam.jwy.Question;
 
+import com.exam.jwy.Answer.Answer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
