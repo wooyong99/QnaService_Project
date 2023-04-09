@@ -7,12 +7,20 @@
 <body>
 <table border="1">
   <tr>
+    <th>번호</th>
     <th>제목</th>
     <th>작성일시</th>
   </tr>
-  <tr th:each="question : ${questionList}">
-    <td th:text="${question.subject}"></td>
-    <td th:text="${question.createDate}"></td>
+  <tr th:each="question, loop:${questionList}">
+    <td>
+      [[${loop.count}]] / [[${loop.size}]]
+    </td>
+    <td>
+      [[${question.subject}]]
+    </td>
+    <td>
+      [[${question.content}]]
+    </td>
   </tr>
 </table>
 </body>
