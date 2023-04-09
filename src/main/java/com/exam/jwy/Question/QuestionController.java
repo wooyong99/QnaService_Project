@@ -13,6 +13,10 @@ import java.util.Optional;
 @Controller
 public class QuestionController {
   private final QuestionRepository questionRepository;
+  @GetMapping("/")
+  public String root(){
+    return "redirect:/question/list";
+  }
   @GetMapping("/question/list")
   public String list(Model model){
     List<Question> questionList = questionRepository.findAll();

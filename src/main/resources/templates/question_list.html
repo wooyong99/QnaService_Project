@@ -10,6 +10,7 @@
     <th>번호</th>
     <th>제목</th>
     <th>작성일시</th>
+    <th>생성날짜</th>
   </tr>
   <tr th:each="question, loop:${questionList}">
     <td>
@@ -21,6 +22,7 @@
     <td>
       [[${question.content}]]
     </td>
+    <td th:text="|Date.${#strings.substring(question.createDate, 2, 16)}분|"></td>
   </tr>
 </table>
 </body>
