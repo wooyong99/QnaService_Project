@@ -13,20 +13,21 @@ import java.util.Optional;
 @Controller
 public class QuestionController {
   private final QuestionRepository questionRepository;
+  private final QuestionService questionService;
   @GetMapping("/")
   public String root(){
     return "redirect:/question/list";
   }
   @GetMapping("/question/list")
   public String list(Model model){
-    List<Question> questionList = questionRepository.findAll();
+    List<Question> questionList = questionService.getList();
     model.addAttribute("questionList", questionList);
     return "question_list"; // ResponseBody 어노테이션을 제거하면 templates 파일에 있는 파일을 뷰로 삼는다.
   }
 
   @GetMapping("/question/detail/{id}")
   public String detail(Model model, @PathVariable int id){
-    Optional<Question> op_q = questionRepository.findById(id);
+    Optional<Question> op_q = questionService.getQuestionById(id);
     if(op_q.isPresent()){
       Question question = op_q.get();
       model.addAttribute("question",question);

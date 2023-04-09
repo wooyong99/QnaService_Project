@@ -17,10 +17,10 @@
       [[${loop.count}]] / [[${loop.size}]]
     </td>
     <td>
-      [[${question.subject}]]
+      <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.subject}]]</a>
     </td>
     <td>
-      [[${question.content}]]
+      <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.content}]]</a>
     </td>
     <td th:text="|Date.${#strings.substring(question.createDate, 2, 16)}분|"></td>
   </tr>
