@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor // final 붙은 변수는 생성자 주입을 해준다.
 @Controller
@@ -27,13 +26,8 @@ public class QuestionController {
 
   @GetMapping("/question/detail/{id}")
   public String detail(Model model, @PathVariable int id){
-    Optional<Question> op_q = questionService.getQuestionById(id);
-    if(op_q.isPresent()){
-      Question question = op_q.get();
-      model.addAttribute("question",question);
-      return "question_detail";
-    }else{
-      return "question_list";
+    Question question = questionService.getQuestionById(id);
+    model.addAttribute("question", question);
+    return "question_detail";
     }
-  }
 }

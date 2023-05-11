@@ -1,5 +1,6 @@
 package com.exam.jwy.Question;
 
+import com.exam.jwy.Exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,11 @@ public class QuestionService {
   public List getList(){
     return questionRepository.findAll();
   }
-  public Optional getQuestionById(int id){
-    return questionRepository.findById(id);
+  public Question getQuestionById(int id){
+    Optional<Question> oq = questionRepository.findById(id);
+    if(oq.isPresent()){
+      return oq.get();
+    }
+    throw new DataNotFoundException("question not found"); // oq객체가 null값이라면 DataNotFoundException 예외를 던져라
   }
 }
