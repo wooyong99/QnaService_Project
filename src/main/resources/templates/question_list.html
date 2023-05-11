@@ -22,7 +22,7 @@
     <td>
       <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.content}]]</a>
     </td>
-    <td th:text="|Date.${#strings.substring(question.createDate, 2, 16)}분|"></td>
+    <td th:text="${#temporals.format(question.createDate,'YY-MM-dd')}"></td>
   </tr>
 </table>
 </body>
