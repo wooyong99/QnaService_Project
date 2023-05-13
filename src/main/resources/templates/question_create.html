@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <title>질문만들기</title>
+</head>
+<body>
+<div class="container">
+    <h2>질문 생성</h2>
+    <form th:action="@{/question/doCreate}" method="post">
+        <label for="subject"></label>
+        <input type="text" name="subject" placeholder="제목을 입력해주세요." required>
+        <label for="content"></label>
+        <textarea name="content"cols="15" rows="10"></textarea>
+        <button type="submit">질문 등록</button><button type="reset">초기화</button>
+    </form>
+</div>
+</body>
+</html>

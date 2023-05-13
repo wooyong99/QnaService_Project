@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -34,5 +36,14 @@ public class QuestionController {
     model.addAttribute("answerList", answerList);
     model.addAttribute("question", question);
     return "question_detail";
+    }
+    @GetMapping("/question/create")
+    public String create(){
+      return "question_create";
+    }
+    @PostMapping("/question/doCreate")
+    public String doCreate(String subject, String content){
+      questionService.create(subject, content);
+      return "redirect:/question/list";
     }
 }
