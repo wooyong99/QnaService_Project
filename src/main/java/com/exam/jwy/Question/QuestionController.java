@@ -1,5 +1,7 @@
 package com.exam.jwy.Question;
 
+import com.exam.jwy.Answer.Answer;
+import com.exam.jwy.Answer.AnswerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor // final 붙은 변수는 생성자 주입을 해준다.
 @Controller
 public class QuestionController {
-  private final QuestionRepository questionRepository;
   private final QuestionService questionService;
+  private final AnswerService answerService;
   @GetMapping("/")
   public String root(){
     return "redirect:/question/list";
@@ -27,6 +29,9 @@ public class QuestionController {
   @GetMapping("/question/detail/{id}")
   public String detail(Model model, @PathVariable int id){
     Question question = questionService.getQuestionById(id);
+    List<Answer> answerList = answerService.getAnswerList(question.getId());
+
+    model.addAttribute("answerList", answerList);
     model.addAttribute("question", question);
     return "question_detail";
     }

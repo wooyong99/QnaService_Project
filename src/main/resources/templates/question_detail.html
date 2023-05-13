@@ -11,9 +11,11 @@
 질문 제목 : <span th:text="${question.subject}"></span><br>
 질문 내용 : <span th:text="${question.content}"></span><br>
 <hr>
+<ul th:each="answer, loop:${answerList}">
+  <li>[[${answer.content}]]</li>
+</ul>
+<hr>
 <form th:action="@{|/answer/create/${question.id}|}" method="post">
-  <label for="subject"></label>
-  <input type="text" placeholder="제목 입력해주세요" name="subject" required><br/>
   <label for="content"></label>
   <textarea placeholder="내용을 입력해주세요." name="content" rows="5" required></textarea><br/>
   <button type="submit">답변등록</button><button type="reset">초기화</button>

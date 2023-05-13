@@ -72,4 +72,13 @@ public class AnswerRepositoryTest {
         .map(a -> a.getContent())
         .forEach(System.out::println);
   }
+  @Test
+  @Transactional
+  @Rollback(false)
+  void test3(){
+    List<Answer> aList = answerRepository.findByQuestionId(1).get();
+    aList.stream()
+            .map( a -> a.getContent())
+            .forEach(System.out::println);
+  }
 }
