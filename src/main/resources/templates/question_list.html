@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>질문 리스트</title>
+    <meta charset="UTF-8">
+    <title>질문 리스트</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<table border="1">
-  <tr>
-    <th>번호</th>
-    <th>제목</th>
-    <th>작성일시</th>
-    <th>생성날짜</th>
-  </tr>
-  <tr th:each="question, loop:${questionList}">
-    <td>
-      [[${loop.count}]] / [[${loop.size}]]
-    </td>
-    <td>
-      <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.subject}]]</a>
-    </td>
-    <td>
-      <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.content}]]</a>
-    </td>
-    <td th:text="${#temporals.format(question.createDate,'YY-MM-dd')}"></td>
-  </tr>
-</table>
+<div class="container my-3">
+    <table class="table">
+        <thead class="table-info">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+            <th>생성날짜</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question, loop:${questionList}">
+            <td>
+                [[${loop.count}]] / [[${loop.size}]]
+            </td>
+            <td>
+                <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.subject}]]</a>
+            </td>
+            <td>
+                <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.content}]]</a>
+            </td>
+            <td th:text="${#temporals.format(question.createDate,'YY-MM-dd')}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

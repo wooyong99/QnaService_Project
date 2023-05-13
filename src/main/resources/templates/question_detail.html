@@ -7,21 +7,32 @@
   <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<h1>질문 상세페이지</h1>
-질문 id : <span th:text="${question.id}"></span><br>
-질문 생성일자 : <span th:text="${#temporals.format(question.createDate)}"></span><br>
-질문 제목 : <span th:text="${question.subject}"></span><br>
-질문 내용 : <span th:text="${question.content}"></span><br>
-<hr>
-<ul th:each="answer, loop:${answerList}">
-  <li>[[${answer.content}]]</li>
-</ul>
-<hr>
-<form th:action="@{|/answer/create/${question.id}|}" method="post">
-  <label for="content"></label>
-  <textarea placeholder="내용을 입력해주세요." name="content" rows="5" required></textarea><br/>
-  <button type="submit">답변등록</button><button type="reset">초기화</button>
-</form>
+<div class="container my-5">
+  <h1>질문 상세페이지</h1>
+  질문 id : <span th:text="${question.id}"></span><br>
+  질문 생성일자 : <span th:text="${#temporals.format(question.createDate)}"></span><br>
+  질문 제목 : <span th:text="${question.subject}"></span><br>
+  질문 내용 : <span th:text="${question.content}"></span><br>
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-info">
+        <th>질문번호</th>
+        <th>질문내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="answer, loop:${answerList}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${answer.content}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <form th:action="@{|/answer/create/${question.id}|}" method="post">
+    <label for="content"></label>
+    <textarea placeholder="내용을 입력해주세요." name="content" rows="5" required></textarea><br/>
+    <button type="submit">답변등록</button><button type="reset">초기화</button>
+  </form>
+</div>
 
 </body>
 </html>
