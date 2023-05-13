@@ -27,10 +27,7 @@ public class AnswerService {
 
 
     public List<Answer> getAnswerList(Integer id) {
-        Optional<List> op_a_list = answerRepository.findByQuestionId(id);
-        if(op_a_list.isPresent()){
-            return op_a_list.get();
-        }
-        throw new DataNotFoundException("answerList not found");
+        return answerRepository.findByQuestionId(id)
+                .orElseThrow(() -> new DataNotFoundException("answerList not found"));
     }
 }

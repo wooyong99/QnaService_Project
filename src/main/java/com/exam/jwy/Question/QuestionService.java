@@ -16,10 +16,7 @@ public class QuestionService {
     return questionRepository.findAll();
   }
   public Question getQuestionById(int id){
-    Optional<Question> oq = questionRepository.findById(id);
-    if(oq.isPresent()){
-      return oq.get();
-    }
-    throw new DataNotFoundException("question not found"); // oq객체가 null값이라면 DataNotFoundException 예외를 던져라
+    return questionRepository.findById(id)
+            .orElseThrow(() -> new DataNotFoundException("no %d question not found".formatted(id)));
   }
 }
