@@ -11,7 +11,8 @@ textarea{
     width:100%;
 }
 input[type=submit],
-button[type=submit]{
+button[type=submit],
+button[type=reset]{
     margin-top:10px;
 }
 a{
