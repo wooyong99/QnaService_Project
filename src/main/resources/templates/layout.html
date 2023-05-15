@@ -11,8 +11,24 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>상단바</h1>
-    <th:block layout:fragment="content"></th:block>
+    <header class="bg-info">
+        <div class="container d-flex text-light">
+            <div>
+                <a th:href="@{/}" class="d-block p-3">
+                    메인화면
+                </a>
+            </div>
+            <div class="flex-grow-1"></div>
+            <div>
+                <a th:href="@{/question/list}" class="d-block p-3">
+                    질문리스트
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="container my-3">
+        <th:block layout:fragment="content"></th:block>
+    </main>
     <footer class="footer bg-info">
         <div class="container d-flex justify-content-center py-4">
             <span>Copyright &copy; 2022. WooYong Jung All rights reserverd.</span>

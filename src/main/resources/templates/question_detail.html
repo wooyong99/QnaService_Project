@@ -3,7 +3,6 @@
     <title>[[${question.id}]]번 게시글</title>
   </th:block>
   <th:block layout:fragment="content">
-  <div class="container my-5">
     <h1 class="py-3 border-bottom" th:text="${question.subject}"></h1>
     <div class="card">
       <div class="card-body">
@@ -27,6 +26,5 @@
       <button type="submit" class="btn btn-info text-light">답변등록</button>
       <button type="reset" class="btn btn-info text-light">초기화</button>
     </form>
-  </div>
   </th:block>
 </html>

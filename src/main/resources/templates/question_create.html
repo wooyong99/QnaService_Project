@@ -3,15 +3,13 @@
         <title>질문 생성</title>
     </th:block>
     <th:block layout:fragment="content">
-        <div class="container">
-            <h2>질문 생성</h2>
-            <form th:action="@{/question/doCreate}" method="post">
-                <label for="subject"></label>
-                <input type="text" name="subject" placeholder="제목을 입력해주세요." required>
-                <label for="content"></label>
-                <textarea name="content"cols="15" rows="10"></textarea>
-                <button type="submit">질문 등록</button><button type="reset">초기화</button>
-            </form>
-        </div>
+        <h2>질문 생성</h2>
+        <form th:action="@{/question/doCreate}" method="post">
+            <label for="subject"></label>
+            <input type="text" name="subject" placeholder="제목을 입력해주세요." required>
+            <label for="content"></label>
+            <textarea name="content"cols="15" rows="10"></textarea>
+            <button type="submit">질문 등록</button><button type="reset">초기화</button>
+        </form>
     </th:block>
 </html>
