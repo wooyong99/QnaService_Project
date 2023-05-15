@@ -24,8 +24,8 @@
     </div>
     <form th:action="@{/answer/create/{id}(id=${question.id})}" method="post">
       <textarea name="content" row="5" placeholder="내용을 입력해주세요."  class="form-control" required></textarea>
-      <button type="submit" class="btn btn-info">답변등록</button>
-      <button type="reset" class="btn btn-info">초기화</button>
+      <button type="submit" class="btn btn-info text-light">답변등록</button>
+      <button type="reset" class="btn btn-info text-light">초기화</button>
     </form>
   </div>
   </th:block>
