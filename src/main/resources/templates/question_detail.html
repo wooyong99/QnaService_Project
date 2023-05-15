@@ -1,37 +1,32 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" th:href="@{/style.css}">
-</head>
-<body>
-<div class="container my-5">
-  <h1 class="py-3 border-bottom" th:text="${question.subject}"></h1>
-  <div class="card">
-    <div class="card-body">
-      <div class="card-text" style="white-space:pre-line;" th:text="${question.content}"></div>
-      <div class="card-text d-flex justify-content-end">
-        <span class="badge bg-light text-dark p-2" th:text="${#temporals.format(question.createDate, 'YY-MM-dd HH:mm')}"></span>
+<html layout:decorate="~{layout}">
+  <th:block layout:fragment="title">
+    <title>[[${question.id}]]번 게시글</title>
+  </th:block>
+  <th:block layout:fragment="content">
+  <div class="container my-5">
+    <h1 class="py-3 border-bottom" th:text="${question.subject}"></h1>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-text" style="white-space:pre-line;" th:text="${question.content}"></div>
+        <div class="card-text d-flex justify-content-end">
+          <span class="badge bg-light text-dark p-2" th:text="${#temporals.format(question.createDate, 'YY-MM-dd HH:mm')}"></span>
+        </div>
       </div>
     </div>
-  </div>
-  <h4 th:text="@{|${#lists.size(question.answerList)}개의 답변이 있습니다.|}" class="border-bottom py-3"></h4>
-  <div class="card mb-3" th:each="answer, loop:${question.answerList}">
-    <div class="card-body">
-      <div class="card-text" th:text="${answer.content}" style="white-space:pre-line;"></div>
-      <div class="card-text d-flex justify-content-end">
-        <div class="badge text-dark bg-light" th:text="${#temporals.format(answer.createDate, 'YY-MM-dd HH:mm')}"></div>
+    <h4 th:text="@{|${#lists.size(question.answerList)}개의 답변이 있습니다.|}" class="border-bottom py-3"></h4>
+    <div class="card mb-3" th:each="answer, loop:${question.answerList}">
+      <div class="card-body">
+        <div class="card-text" th:text="${answer.content}" style="white-space:pre-line;"></div>
+        <div class="card-text d-flex justify-content-end">
+          <div class="badge text-dark bg-light" th:text="${#temporals.format(answer.createDate, 'YY-MM-dd HH:mm')}"></div>
+        </div>
       </div>
     </div>
+    <form th:action="@{/answer/create/{id}(id=${question.id})}" method="post">
+      <textarea name="content" row="5" placeholder="내용을 입력해주세요."  class="form-control" required></textarea>
+      <button type="submit" class="btn btn-info">답변등록</button>
+      <button type="reset" class="btn btn-info">초기화</button>
+    </form>
   </div>
-  <form th:action="@{/answer/create/{id}(id=${question.id})}" method="post">
-    <textarea name="content" row="5" placeholder="내용을 입력해주세요."  class="form-control" required></textarea>
-    <button type="submit" class="btn btn-info">답변등록</button>
-    <button type="reset" class="btn btn-info">초기화</button>
-  </form>
-</div>
-
-</body>
+  </th:block>
 </html>
