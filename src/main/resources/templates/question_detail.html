@@ -21,6 +21,9 @@
   <div class="card mb-3" th:each="answer, loop:${question.answerList}">
     <div class="card-body">
       <div class="card-text" th:text="${answer.content}" style="white-space:pre-line;"></div>
+      <div class="card-text d-flex justify-content-end">
+        <div class="badge text-dark bg-light" th:text="${#temporals.format(answer.createDate, 'YY-MM-dd HH:mm')}"></div>
+      </div>
     </div>
   </div>
   <form th:action="@{/answer/create/{id}(id=${question.id})}" method="post">
