@@ -17,7 +17,9 @@
       <div class="card-body">
         <div class="card-text" th:text="${answer.content}" style="white-space:pre-line;"></div>
         <div class="car-text d-flex justify-content-end mb-2">
-          <div class="badge text-light bg-info p-2" th:text="@{삭제}"></div>
+          <div class="badge text-light bg-info">
+            <a th:href="@{|/answer/delete/${question.id}/${answer.id}|}" th:text="@{삭제}"></a>
+          </div>
         </div>
         <div class="card-text d-flex justify-content-end">
           <div class="badge text-dark bg-light p-2" th:text="${#temporals.format(answer.createDate, 'YY-MM-dd HH:mm')}"></div>

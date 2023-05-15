@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,5 +27,9 @@ public class AnswerService {
     public List<Answer> getAnswerList(Integer id) {
         return answerRepository.findByQuestionId(id)
                 .orElseThrow(() -> new DataNotFoundException("answerList not found"));
+    }
+
+    public void deleteAnswer(Integer id) {
+        answerRepository.deleteById(id);
     }
 }
