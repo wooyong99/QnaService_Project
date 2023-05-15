@@ -16,8 +16,11 @@
     <div class="card mb-3" th:each="answer, loop:${question.answerList}">
       <div class="card-body">
         <div class="card-text" th:text="${answer.content}" style="white-space:pre-line;"></div>
+        <div class="car-text d-flex justify-content-end mb-2">
+          <div class="badge text-light bg-info p-2" th:text="@{삭제}"></div>
+        </div>
         <div class="card-text d-flex justify-content-end">
-          <div class="badge text-dark bg-light" th:text="${#temporals.format(answer.createDate, 'YY-MM-dd HH:mm')}"></div>
+          <div class="badge text-dark bg-light p-2" th:text="${#temporals.format(answer.createDate, 'YY-MM-dd HH:mm')}"></div>
         </div>
       </div>
     </div>
