@@ -12,7 +12,7 @@
     <th:block layout:fragment="title"></th:block>
     <title>Document</title>
 </head>
-<body>
+<body class="d-flex flex-column">
     <header class="bg-info">
         <div class="container d-flex text-light">
             <div>
@@ -28,7 +28,7 @@
             </div>
         </div>
     </header>
-    <main class="container my-3">
+    <main class="container my-3 flex-grow-1">
         <th:block layout:fragment="content"></th:block>
     </main>
     <footer class="footer bg-info">
