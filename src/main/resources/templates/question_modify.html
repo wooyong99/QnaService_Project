@@ -1,0 +1,16 @@
+<html
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org"
+    layout:decorate = "~{layout}">
+<th:block layout:fragment="title">
+    <title>[[${question.id}]]번 질문 수정</title>
+</th:block>
+<th:block layout:fragment="content">
+    <form th:action="@{|/question/doModify/${question.id}|}" method="post">
+        제목 : <input name="subject" type="text" class="form-control" th:value="${question.subject}" autofocus />
+        내용: <textarea name="content" class="form-control" row="15" th:text="${question.content}"></textarea>
+        <button class="btn btn-info text-light" type="submit">질문 수정</button>
+        <button class="btn btn-info text-light" type="reset">초기화</button>
+    </form>
+</th:block>
+</html>

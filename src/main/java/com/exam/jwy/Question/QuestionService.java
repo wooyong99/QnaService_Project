@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +26,12 @@ public class QuestionService {
     question.setContent(content);
     question.setSubject(subject);
 
+    questionRepository.save(question);
+  }
+
+  public void update(Question question, String subject, String content) {
+    question.setSubject(subject);
+    question.setContent(content);
     questionRepository.save(question);
   }
 }
