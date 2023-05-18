@@ -2,9 +2,11 @@ package com.exam.jwy.Question;
 
 import com.exam.jwy.Answer.Answer;
 import com.exam.jwy.Answer.AnswerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,19 +39,12 @@ public class QuestionController {
     return "question_detail";
     }
     @GetMapping("/question/create")
-    public String create(){
+    public String create(QuestionForm questionForm){
       return "question_create";
     }
     @PostMapping("/question/doCreate")
-    public String doCreate(Model model, QuestionForm questionForm){
-      if(questionForm.getSubject().isEmpty() || questionForm.getSubject().trim().length() == 0){
-        model.addAttribute("questionForm", questionForm);
-        model.addAttribute("error_msg", "제목을 입력해주세요.");
-        return "question_create";
-      }
-      if(questionForm.getContent().isEmpty() || questionForm.getContent().trim().length() == 0){
-        model.addAttribute("questionForm", questionForm);
-        model.addAttribute("error_msg", "내용을 입력해주세요.");
+    public String doCreate(Model model, @Valid QuestionForm questionForm, BindingResult bindingResult){
+      if(bindingResult.hasErrors()){
         return "question_create";
       }
       questionService.create(questionForm.subject, questionForm.content);
