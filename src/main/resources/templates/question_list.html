@@ -6,7 +6,6 @@
         <title>질문리스트</title>
     </th:block>
     <th:block layout:fragment="content">
-        <a th:href="@{/question/create}">게시글 생성하기</a>
         <table class="table">
             <thead class="bg-info text-light">
             <tr>
@@ -31,5 +30,6 @@
             </tr>
             </tbody>
         </table>
+        <a class="btn btn-info text-light" th:href="@{/question/create}">질문 등록</a>
     </th:block>
 </html>
