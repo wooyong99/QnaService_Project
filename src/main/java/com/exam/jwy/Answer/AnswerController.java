@@ -22,9 +22,16 @@ public class AnswerController {
     @PostMapping("/create/{id}")
     public String createArticle(Model model , @PathVariable("id") int id , String content){
         Question question = questionService.getQuestionById(id);
+        List<Answer> answerList = answerService.getAnswerList(question.getId());
+
+        if( content.isEmpty() || content.trim().length() == 0){
+            model.addAttribute("error_msg", "답변을 입력해주세요.");
+            model.addAttribute("answerList", answerList);
+            model.addAttribute("question", question);
+            return "question_detail";
+        }
         answerService.createAnswer(question, content);
 
-        List<Answer> answerList = answerService.getAnswerList(question.getId());
 
         model.addAttribute("answerList", answerList);
         model.addAttribute("question", question);
