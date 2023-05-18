@@ -61,9 +61,19 @@ public class QuestionController {
       return "question_modify";
     }
     @PostMapping("/question/doModify/{id}")
-    public String doModify(@PathVariable int id, String subject, String content){
+    public String doModify(Model model,@PathVariable int id, QuestionForm questionForm){
       Question question = questionService.getQuestionById(id);
-      questionService.update(question, subject, content);
+      if(questionForm.getSubject().isEmpty() || questionForm.getSubject().trim().length() == 0){
+        model.addAttribute("error_msg", "제목을 입력해주세요.");
+        model.addAttribute("question", question);
+        return "question_modify";
+      }
+      if(questionForm.getContent().isEmpty() || questionForm.getContent().trim().length() == 0){
+        model.addAttribute("error_msg", "내용을 입력해주세요.");
+        model.addAttribute("question", question);
+        return "question_modify";
+      }
+      questionService.update(question, questionForm.subject, questionForm.content);
       return "redirect:/question/detail/%d".formatted(id);
     }
 }
