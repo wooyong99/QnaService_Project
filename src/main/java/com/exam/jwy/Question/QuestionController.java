@@ -41,8 +41,16 @@ public class QuestionController {
       return "question_create";
     }
     @PostMapping("/question/doCreate")
-    public String doCreate(String subject, String content){
-      questionService.create(subject, content);
+    public String doCreate(Model model, QuestionForm questionFrom){
+      if(questionFrom.getSubject().isEmpty() || questionFrom.getSubject().trim().length() == 0){
+        model.addAttribute("error_msg", "제목을 입력해주세요.");
+        return "question_create";
+      }
+      if(questionFrom.getContent().isEmpty() || questionFrom.getSubject().trim().length() == 0){
+        model.addAttribute("error_msg", "내용을 입력해주세요.");
+        return "question_create";
+      }
+      questionService.create(questionFrom.subject, questionFrom.content);
       return "redirect:/question/list";
     }
     @GetMapping("/question/modify/{id}")
