@@ -1,6 +1,7 @@
 package com.exam.jwy.Question;
 
 import com.exam.jwy.Answer.Answer;
+import com.exam.jwy.Answer.AnswerForm;
 import com.exam.jwy.Answer.AnswerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class QuestionController {
   }
 
   @GetMapping("/question/detail/{id}")
-  public String detail(Model model, @PathVariable int id){
+  public String detail(Model model, @PathVariable int id, AnswerForm answerForm){
     Question question = questionService.getQuestionById(id);
     List<Answer> answerList = answerService.getAnswerList(question.getId());
 
