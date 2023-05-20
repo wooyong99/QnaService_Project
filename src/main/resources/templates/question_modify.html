@@ -1,7 +1,7 @@
 <html
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     xmlns:th="http://www.thymeleaf.org"
-    layout:decorate = "~{layout}">
+    layout:decorate = "~{layout/layout}">
 <th:block layout:fragment="title">
     <title th:text="${question} ? ${question.id} : ${question_id}"></title>
 </th:block>
