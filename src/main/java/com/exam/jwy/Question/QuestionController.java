@@ -52,22 +52,16 @@ public class QuestionController {
       return "redirect:/question/list";
     }
     @GetMapping("/question/modify/{id}")
-    public String modify(Model model, @PathVariable int id){
+    public String modify(Model model, @PathVariable int id, QuestionForm questionForm){
       Question question = questionService.getQuestionById(id);
       model.addAttribute("question", question);
 
       return "question_modify";
     }
     @PostMapping("/question/doModify/{id}")
-    public String doModify(Model model,@PathVariable int id, QuestionForm questionForm){
+    public String doModify(Model model, @PathVariable int id, @Valid QuestionForm questionForm, BindingResult bindingResult){
       Question question = questionService.getQuestionById(id);
-      if(questionForm.getSubject().isEmpty() || questionForm.getSubject().trim().length() == 0){
-        model.addAttribute("error_msg", "제목을 입력해주세요.");
-        model.addAttribute("question", question);
-        return "question_modify";
-      }
-      if(questionForm.getContent().isEmpty() || questionForm.getContent().trim().length() == 0){
-        model.addAttribute("error_msg", "내용을 입력해주세요.");
+      if(bindingResult.hasErrors()){
         model.addAttribute("question", question);
         return "question_modify";
       }
