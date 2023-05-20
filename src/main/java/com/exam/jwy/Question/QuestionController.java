@@ -62,7 +62,7 @@ public class QuestionController {
     public String doModify(Model model, @PathVariable int id, @Valid QuestionForm questionForm, BindingResult bindingResult){
       Question question = questionService.getQuestionById(id);
       if(bindingResult.hasErrors()){
-        model.addAttribute("question", question);
+        model.addAttribute("question_id", question.getId());
         return "question_modify";
       }
       questionService.update(question, questionForm.subject, questionForm.content);

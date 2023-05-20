@@ -3,11 +3,12 @@
     xmlns:th="http://www.thymeleaf.org"
     layout:decorate = "~{layout}">
 <th:block layout:fragment="title">
-    <title>[[${question.id}]]번 질문 수정</title>
+    <title th:text="${question} ? ${question.id} : ${question_id}"></title>
 </th:block>
 <th:block layout:fragment="content">
     <h1 class="border-bottom py-3 mb-3">질문 수정</h1>
-    <form th:action="@{|/question/doModify/${question.id}|}" method="post" th:object="${questionForm}">
+    <form th:action="@{/question/doModify/{id}(id=${question} ? ${question.id} : ${question_id})
+    }" method="post" th:object="${questionForm}">
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -21,11 +22,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label"><h5>질문</h5></label>
-            <input type="text" class="form-control" name="subject" th:value="${question.subject} ? ${question.subject} : ${questionForm.subject}" autofocus/>
+            <input type="text" class="form-control" name="subject" th:value="${question} ? ${question.subject} : ${questionForm.subject}" autofocus/>
         </div>
         <div class="mb-3">
             <label class="form-label"><h5>내용</h5></label>
-            <textarea class="form-control" cols="15" rows="10" name="content" th:text="${question.content} ? ${question.content} : ${questionForm.content}"></textarea>
+            <textarea class="form-control" cols="15" rows="10" name="content" th:text="${question} ? ${question.content} : ${questionForm.content}"></textarea>
         </div>
         <button class="btn btn-info text-light" type="submit">질문 수정</button>
         <button class="btn btn-info text-light" type="reset">초기화</button>
