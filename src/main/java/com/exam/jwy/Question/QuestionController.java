@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor // final 붙은 변수는 생성자 주입을 해준다.
 @Controller
@@ -23,9 +24,9 @@ public class QuestionController {
   public String root(){
     return "redirect:/question/list";
   }
-  @GetMapping("/question/list")
-  public String list(Model model){
-    List<Question> questionList = questionService.getList();
+  @GetMapping(value = {"/question/list","/question/list/{id}"})
+  public String list(Model model, @PathVariable Optional<Integer> id){
+    List<Question> questionList = questionService.getPageList(id.isPresent() ? id.get() : 1);
     model.addAttribute("questionList", questionList);
     return "question_list"; // ResponseBody 어노테이션을 제거하면 templates 파일에 있는 파일을 뷰로 삼는다.
   }

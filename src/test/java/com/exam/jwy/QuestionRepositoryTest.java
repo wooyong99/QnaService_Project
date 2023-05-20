@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -95,5 +96,15 @@ class QuestionRepositoryTest {
 		questionRepository.delete(q2);
 		List<Question> qlist = questionRepository.findAll();
 		System.out.println(qlist.size());
+	}
+	@Test
+	void createTestData(){
+		IntStream.rangeClosed(3,300).forEach(id -> {
+			Question q = new Question();
+			q.setSubject("%d번 질문 제목".formatted(id));
+			q.setContent("%d번 질문 내용".formatted(id));
+			q.setCreateDate(LocalDateTime.now());
+			questionRepository.save(q);
+		});
 	}
 	}

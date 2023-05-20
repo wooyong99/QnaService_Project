@@ -2,6 +2,8 @@ package com.exam.jwy.Question;
 
 import com.exam.jwy.base.RepositoryUtil;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +27,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>, Re
   List<Question> findBySubjectOrderById(String subject);
 
   List<Question> findBySubjectOrderByIdDesc(String subject);
+
+  Page<Question> findAll(Pageable pageable);
 }

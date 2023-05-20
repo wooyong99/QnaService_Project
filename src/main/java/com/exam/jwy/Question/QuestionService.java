@@ -2,6 +2,8 @@ package com.exam.jwy.Question;
 
 import com.exam.jwy.Exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,5 +35,11 @@ public class QuestionService {
     question.setSubject(subject);
     question.setContent(content);
     questionRepository.save(question);
+  }
+
+  public List<Question> getPageList(Integer current_page) {
+    Page<Question> page_q = questionRepository.findAll(Pageable.ofSize(10).withPage(current_page));
+    return page_q.stream().toList();
+
   }
 }
