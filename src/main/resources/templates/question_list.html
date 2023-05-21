@@ -18,7 +18,7 @@
             <tbody>
             <tr th:each="question, loop:${questionList}">
                 <td>
-                    [[${loop.count}]] / [[${loop.size}]]
+                    [[${question.id}]]
                 </td>
                 <td>
                     <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.subject}]]</a>
@@ -30,6 +30,13 @@
             </tr>
             </tbody>
         </table>
+        <ul class="list-unstyled d-flex gap-3">
+            <a th:href="@{/question/list/{page}(page=${pageNum == 0} ? 0 : ${pageNum-5})}">이전</a>
+            <li th:each="number : ${#numbers.sequence(pageNum, pageNum+4)}">
+                <a th:href="@{|/question/list/${number}|}">[[${number+1}]]</a>
+            </li>
+            <a th:href="@{/question/list/{page}(page=${pageNum+5})}">다음</a>
+        </ul>
         <a class="btn btn-info text-light" th:href="@{/question/create}">질문 등록</a>
     </th:block>
 </html>

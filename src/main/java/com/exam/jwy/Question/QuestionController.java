@@ -26,7 +26,8 @@ public class QuestionController {
   }
   @GetMapping(value = {"/question/list","/question/list/{id}"})
   public String list(Model model, @PathVariable Optional<Integer> id){
-    List<Question> questionList = questionService.getPageList(id.isPresent() ? id.get() : 1);
+    List<Question> questionList = questionService.getPageList(id.isPresent() ? id.get() : 0);
+    model.addAttribute("pageNum", id.orElse(0)/5 * 5);
     model.addAttribute("questionList", questionList);
     return "question_list"; // ResponseBody 어노테이션을 제거하면 templates 파일에 있는 파일을 뷰로 삼는다.
   }
