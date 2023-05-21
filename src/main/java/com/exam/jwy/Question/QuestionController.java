@@ -5,6 +5,7 @@ import com.exam.jwy.Answer.AnswerForm;
 import com.exam.jwy.Answer.AnswerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,9 +27,9 @@ public class QuestionController {
   }
   @GetMapping(value = {"/question/list","/question/list/{id}"})
   public String list(Model model, @PathVariable Optional<Integer> id){
-    List<Question> questionList = questionService.getPageList(id.isPresent() ? id.get() : 0);
-    model.addAttribute("pageNum", id.orElse(0)/5 * 5);
-    model.addAttribute("questionList", questionList);
+    Page<Question> pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0);
+    model.addAttribute("pagingNum", (pagingList.getNumber() /5 ) * 5 + 1 );
+    model.addAttribute("pagingList", pagingList);
     return "question_list"; // ResponseBody 어노테이션을 제거하면 templates 파일에 있는 파일을 뷰로 삼는다.
   }
 

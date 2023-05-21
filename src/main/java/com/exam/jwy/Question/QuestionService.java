@@ -37,9 +37,9 @@ public class QuestionService {
     questionRepository.save(question);
   }
 
-  public List<Question> getPageList(Integer current_page) {
+  public Page<Question> getPageList(Integer current_page) {
     Page<Question> page_q = questionRepository.findAll(Pageable.ofSize(10).withPage(current_page));
-    return page_q.stream().toList();
+    return page_q;
 
   }
 }

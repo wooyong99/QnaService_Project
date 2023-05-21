@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="question, loop:${questionList}">
+            <tr th:each="question, loop:${pagingList}">
                 <td>
                     [[${question.id}]]
                 </td>
@@ -30,13 +30,19 @@
             </tr>
             </tbody>
         </table>
-        <ul class="list-unstyled d-flex gap-3">
-            <a th:href="@{/question/list/{page}(page=${pageNum == 0} ? 0 : ${pageNum-5})}">이전</a>
-            <li th:each="number : ${#numbers.sequence(pageNum, pageNum+4)}">
-                <a th:href="@{|/question/list/${number}|}">[[${number+1}]]</a>
-            </li>
-            <a th:href="@{/question/list/{page}(page=${pageNum+5})}">다음</a>
-        </ul>
+        <nav th:if="${pagingList}">
+            <ul class="pagination d-flex justify-content-center">
+                <li class="page-item" th:classappend="${pagingNum == 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{{num}(num=${pagingNum-5})}" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item" th:each="page : ${#numbers.sequence(pagingNum, pagingNum+4)}" th:classappend="${pagingList.number == page-1} ? 'active'">
+                    <a class="page-link" th:href="@{{num}(num=${page})}">[[${page}]]</a>
+                </li>
+                <li class="page-item" th:classappend="${pagingNum > pagingList.totalPages - 5} ? 'disabled'">
+                    <a class="page-link" th:href="@{{num}(num=${pagingNum+5})}">Next</a>
+                </li>
+            </ul>
+        </nav>
         <a class="btn btn-info text-light" th:href="@{/question/create}">질문 등록</a>
     </th:block>
 </html>
