@@ -25,9 +25,13 @@ public class QuestionController {
   public String root(){
     return "redirect:/question/list";
   }
-  @GetMapping(value = {"/question/list","/question/list/{id}"})
-  public String list(Model model, @PathVariable Optional<Integer> id){
+  @GetMapping(value = {"/question/list","/question/list/{id}","/question/list/{id}/{order_by}"})
+  public String list(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by){
     Page<Question> pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0);
+    String order = (order_by.isEmpty() ? "ASC" : order_by.get());
+    if(order.equals("DESC")){
+      pagingList = questionService.getPageListDesc(id.isPresent() ? id.get()-1 : 0);
+    }
     model.addAttribute("pagingNum", (pagingList.getNumber() /5 ) * 5 + 1 );
     model.addAttribute("pagingList", pagingList);
     return "question_list"; // ResponseBody 어노테이션을 제거하면 templates 파일에 있는 파일을 뷰로 삼는다.
