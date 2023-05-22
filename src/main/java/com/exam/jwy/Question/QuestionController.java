@@ -23,9 +23,9 @@ public class QuestionController {
   private final AnswerService answerService;
   @GetMapping("/")
   public String root(){
-    return "redirect:/question/list/ASC/1";
+    return "redirect:/question/list";
   }
-  @GetMapping(value = {"/question/list","/question/list/{order_by}/{id}"})
+  @GetMapping(value = {"/question/list","/question/list/{id}/{order_by}"})
   public String list(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by){
     Page<Question> pagingList = null;
     String order = (order_by.isEmpty() ? "ASC" : order_by.get());
