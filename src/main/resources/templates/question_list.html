@@ -21,10 +21,10 @@
                     [[${question.id}]]
                 </td>
                 <td>
-                    <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.subject}]]</a>
+                    <a th:href="@{|/question/detail/${question.id}|}">[[${question.subject}]]</a>
                 </td>
                 <td>
-                    <a th:href="@{/question/detail/{id}(id=${question.id})}">[[${question.content}]]</a>
+                    <a th:href="@{|/question/detail/${question.id}|}">[[${question.content}]]</a>
                 </td>
                 <td th:text="${#temporals.format(question.createDate,'YY-MM-dd')}"></td>
             </tr>
@@ -33,13 +33,13 @@
         <nav th:if="${pagingList}">
             <ul class="pagination d-flex justify-content-center">
                 <li class="page-item" th:classappend="${pagingNum == 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{{num}(num=${pagingNum-5})}" tabindex="-1" aria-disabled="true">Previous</a>
+                    <a class="page-link" th:href="@{|/question/list/${order}/${pagingNum-5}|}" tabindex="-1" aria-disabled="true">Previous</a>
                 </li>
                 <li class="page-item" th:each="page : ${#numbers.sequence(pagingNum, pagingNum+4)}" th:classappend="${pagingList.number == page-1} ? 'active'">
-                    <a class="page-link" th:href="@{{num}(num=${page})}">[[${page}]]</a>
+                    <a class="page-link" th:href="@{|/question/list/${order}/${page}|}">[[${page}]]</a>
                 </li>
                 <li class="page-item" th:classappend="${pagingNum > pagingList.totalPages - 5} ? 'disabled'">
-                    <a class="page-link" th:href="@{{num}(num=${pagingNum+5})}">Next</a>
+                    <a class="page-link" th:href="@{|/question/list/${order}/${pagingNum+5}|}">Next</a>
                 </li>
             </ul>
         </nav>

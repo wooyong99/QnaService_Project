@@ -23,15 +23,19 @@ public class QuestionController {
   private final AnswerService answerService;
   @GetMapping("/")
   public String root(){
-    return "redirect:/question/list";
+    return "redirect:/question/list/ASC/1";
   }
-  @GetMapping(value = {"/question/list","/question/list/{id}","/question/list/{id}/{order_by}"})
+  @GetMapping(value = {"/question/list","/question/list/{order_by}/{id}"})
   public String list(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by){
-    Page<Question> pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0);
+    Page<Question> pagingList = null;
     String order = (order_by.isEmpty() ? "ASC" : order_by.get());
+    System.out.println(order_by.isEmpty());
     if(order.equals("DESC")){
-      pagingList = questionService.getPageListDesc(id.isPresent() ? id.get()-1 : 0);
+      pagingList = questionService.getPageListCreateDateDesc(id.isPresent() ? id.get()-1 : 0);
+    }else if(order.equals("ASC")){
+      pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0);
     }
+    model.addAttribute("order", order);
     model.addAttribute("pagingNum", (pagingList.getNumber() /5 ) * 5 + 1 );
     model.addAttribute("pagingList", pagingList);
     return "question_list"; // ResponseBody 어노테이션을 제거하면 templates 파일에 있는 파일을 뷰로 삼는다.

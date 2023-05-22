@@ -44,11 +44,18 @@ public class QuestionService {
     Page<Question> page_q = questionRepository.findAll(Pageable.ofSize(10).withPage(current_page));
     return page_q;
   }
-  public Page<Question> getPageListDesc(Integer current_page){
+  public Page<Question> getPageListCreateDateDesc(Integer current_page){
     List<Sort.Order> sort = new ArrayList<>();
     sort.add(Sort.Order.desc("createDate"));
     sort.add(Sort.Order.desc("id"));
     Page<Question> page_q = questionRepository.findAll(PageRequest.of(current_page,10, Sort.by(sort)));
+    return page_q;
+  }
+  public Page<Question> getPageListSubjectDesc(Integer current_page){
+    List<Sort.Order> sort = new ArrayList<>();
+    sort.add(Sort.Order.desc("subject"));
+    sort.add(Sort.Order.desc("id"));
+    Page<Question> page_q = questionRepository.findAll(PageRequest.of(current_page, 10, Sort.by(sort)));
     return page_q;
   }
 }
