@@ -45,9 +45,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="question, loop:${pagingList}">
+            <tr th:each="question, loop : ${pagingList}">
                 <td>
-                    [[${question.id}]]
+                    [[${pagingList.getPageable().getOffset() + loop.index+1}]]
                 </td>
                 <td>
                     <a th:href="@{|/question/detail/${question.id}|}">[[${question.subject}]]</a>
