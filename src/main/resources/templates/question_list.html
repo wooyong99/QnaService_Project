@@ -50,7 +50,7 @@
                     [[${pagingList.getPageable().getOffset() + loop.index+1}]]
                 </td>
                 <td>
-                    <a th:href="@{|/question/detail/${question.id}|}">[[${question.subject}]]</a>
+                    <a th:href="@{|/question/detail/${question.id}|}">[[${question.subject}]]&nbsp;&nbsp;<span style="color:red; font-weight:bold;" th:text="@{|[${question.answerCount()}]|}"></span></a>
                 </td>
                 <td>
                     <a th:href="@{|/question/detail/${question.id}|}">[[${question.content}]]</a>

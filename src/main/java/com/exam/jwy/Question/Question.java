@@ -28,4 +28,7 @@ public class Question{
     answer.setQuestion(this);
     getAnswerList().add(answer);
   }
+  public int answerCount(){
+    return this.answerList.size();
+  }
 }
