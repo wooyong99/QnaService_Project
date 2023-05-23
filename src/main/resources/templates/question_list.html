@@ -11,17 +11,37 @@
                 정렬
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" th:href="@{|/question/list/${pagingList.number+1}/ASC/subject|}">제목</a></li>
                 <li><a class="dropdown-item" th:href="@{|/question/list|}">생성날짜</a></li>
+                <li><a class="dropdown-item" th:href="@{|/question/list/${pagingList.number+1}/DESC/subject|}">제목</a></li>
             </ul>
         </div>
         <table class="table">
             <thead class="bg-info text-light">
             <tr>
                 <th>번호</th>
-                <th>제목</th>
+                <th>
+                    <span class="dropdown d-flex">
+                    <button class="btn btn-info btn-sm dropdown-toggle text-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        제목
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" th:href="@{|/question/list/${pagingList.number+1}/DESC/subject|}">내림차순</a></li>
+                        <li><a class="dropdown-item" th:href="@{|/question/list/${pagingList.number+1}/ASC/subject|}">올림차순</a></li>
+                    </ul>
+                    </span>
+                </th>
                 <th>내용</th>
-                <th>생성날짜</th>
+                <th>
+                    <span class="dropdown d-flex">
+                        <button class="btn btn-info btn-sm dropdown-toggle text-light" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                            생성날짜
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" th:href="@{|/question/list/${pagingList.number+1}/DESC/createDate|}">내림차순</a></li>
+                            <li><a class="dropdown-item" th:href="@{|/question/list/${pagingList.number+1}/ASC/createDate|}">올림차순</a></li>
+                        </ul>
+                    </span>
+                </th>
             </tr>
             </thead>
             <tbody>

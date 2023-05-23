@@ -27,7 +27,7 @@ public class QuestionController {
   }
   @GetMapping(value = {"/question/list","/question/list/{id}","/question/list/{id}/{order_by}"})
   public String list(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by, Optional<String> sort){
-    String order = (order_by.isEmpty() ? "ASC" : order_by.get());
+    String order = (order_by.isEmpty() ? "DESC" : order_by.get());
     Page<Question> pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0, order);
 
     model.addAttribute("sortType", sort.isEmpty() ? "createDate" : sort.get());
@@ -39,7 +39,7 @@ public class QuestionController {
   @GetMapping(value={"/question/list/{id}/{order_by}/{sort}"})
   public String subjectList(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by, @PathVariable Optional<String> sort){
     Page<Question> pagingList = null;
-    String order = (order_by.isEmpty() ? "ASC" : order_by.get());
+    String order = (order_by.isEmpty() ? "DESC" : order_by.get());
     if(sort.get().equals("subject")){
       pagingList = questionService.getPageListSubject(id.isPresent() ? id.get()-1 : 0, order);
     }else{
