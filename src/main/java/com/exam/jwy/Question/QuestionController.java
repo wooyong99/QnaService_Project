@@ -25,22 +25,32 @@ public class QuestionController {
   public String root(){
     return "redirect:/question/list";
   }
-  @GetMapping(value = {"/question/list","/question/list/{id}/{order_by}"})
-  public String list(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by){
-    Page<Question> pagingList = null;
+  @GetMapping(value = {"/question/list","/question/list/{id}","/question/list/{id}/{order_by}"})
+  public String list(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by, Optional<String> sort){
     String order = (order_by.isEmpty() ? "ASC" : order_by.get());
-    System.out.println(order_by.isEmpty());
-    if(order.equals("DESC")){
-      pagingList = questionService.getPageListCreateDateDesc(id.isPresent() ? id.get()-1 : 0);
-    }else if(order.equals("ASC")){
-      pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0);
-    }
+    Page<Question> pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0, order);
+
+    model.addAttribute("sortType", sort.isEmpty() ? "createDate" : sort.get());
     model.addAttribute("order", order);
     model.addAttribute("pagingNum", (pagingList.getNumber() /5 ) * 5 + 1 );
     model.addAttribute("pagingList", pagingList);
     return "question_list"; // ResponseBody 어노테이션을 제거하면 templates 파일에 있는 파일을 뷰로 삼는다.
   }
-
+  @GetMapping(value={"/question/list/{id}/{order_by}/{sort}"})
+  public String subjectList(Model model, @PathVariable Optional<Integer> id, @PathVariable Optional<String> order_by, @PathVariable Optional<String> sort){
+    Page<Question> pagingList = null;
+    String order = (order_by.isEmpty() ? "ASC" : order_by.get());
+    if(sort.get().equals("subject")){
+      pagingList = questionService.getPageListSubject(id.isPresent() ? id.get()-1 : 0, order);
+    }else{
+      pagingList = questionService.getPageList(id.isPresent() ? id.get()-1 : 0, order);
+    }
+    model.addAttribute("sortType", sort.get());
+    model.addAttribute("order", order);
+    model.addAttribute("pagingNum", (pagingList.getNumber() /5 ) * 5 + 1 );
+    model.addAttribute("pagingList", pagingList);
+    return "question_list";
+  }
   @GetMapping("/question/detail/{id}")
   public String detail(Model model, @PathVariable int id, AnswerForm answerForm){
     Question question = questionService.getQuestionById(id);

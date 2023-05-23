@@ -40,22 +40,31 @@ public class QuestionService {
     questionRepository.save(question);
   }
 
-  public Page<Question> getPageList(Integer current_page) {
-    Page<Question> page_q = questionRepository.findAll(Pageable.ofSize(10).withPage(current_page));
+  public Page<Question> getPageList(Integer current_page, String order) {
+    Page<Question> page_q = null;
+    List<Sort.Order> sort = new ArrayList<>();
+    if(order.equals("DESC")){
+      sort.add(Sort.Order.desc("createDate"));
+      sort.add(Sort.Order.desc("id"));
+      page_q = questionRepository.findAll(PageRequest.of(current_page, 10, Sort.by(sort)));
+    }else{
+      page_q = questionRepository.findAll(Pageable.ofSize(10).withPage(current_page));
+    }
     return page_q;
   }
-  public Page<Question> getPageListCreateDateDesc(Integer current_page){
+  public Page<Question> getPageListSubject(Integer current_page, String sortType){
     List<Sort.Order> sort = new ArrayList<>();
-    sort.add(Sort.Order.desc("createDate"));
-    sort.add(Sort.Order.desc("id"));
-    Page<Question> page_q = questionRepository.findAll(PageRequest.of(current_page,10, Sort.by(sort)));
-    return page_q;
-  }
-  public Page<Question> getPageListSubjectDesc(Integer current_page){
-    List<Sort.Order> sort = new ArrayList<>();
-    sort.add(Sort.Order.desc("subject"));
-    sort.add(Sort.Order.desc("id"));
-    Page<Question> page_q = questionRepository.findAll(PageRequest.of(current_page, 10, Sort.by(sort)));
+    Page<Question> page_q = null;
+    if(sortType.equals("DESC")){
+      sort.add(Sort.Order.desc("subject"));
+      sort.add(Sort.Order.desc("id"));
+      page_q = questionRepository.findAll(PageRequest.of(current_page, 10, Sort.by(sort)));
+    }else{
+      sort.add(Sort.Order.asc("subject"));
+      sort.add(Sort.Order.asc("id"));
+      page_q = questionRepository.findAll(PageRequest.of(current_page, 10, Sort.by(sort)));
+    }
+
     return page_q;
   }
 }

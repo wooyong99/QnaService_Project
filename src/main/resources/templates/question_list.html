@@ -11,9 +11,8 @@
                 정렬
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" th:href="@{|/question/list/${pagingList.number+1}/ASC/subject|}">제목</a></li>
+                <li><a class="dropdown-item" th:href="@{|/question/list|}">생성날짜</a></li>
             </ul>
         </div>
         <table class="table">
@@ -21,7 +20,7 @@
             <tr>
                 <th>번호</th>
                 <th>제목</th>
-                <th>작성일시</th>
+                <th>내용</th>
                 <th>생성날짜</th>
             </tr>
             </thead>
@@ -43,13 +42,13 @@
         <nav th:if="${pagingList}">
             <ul class="pagination d-flex justify-content-center">
                 <li class="page-item" th:classappend="${pagingNum == 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{|/question/list/${pagingNum-5}/${order}|}" tabindex="-1" aria-disabled="true">Previous</a>
+                    <a class="page-link" th:href="@{|/question/list/${pagingNum-5}/${order}/${sortType}|}" tabindex="-1" aria-disabled="true">Previous</a>
                 </li>
                 <li class="page-item" th:each="page : ${#numbers.sequence(pagingNum, pagingNum+4)}" th:classappend="${pagingList.number == page-1} ? 'active'">
-                    <a class="page-link" th:href="@{|/question/list/${page}/${order}|}">[[${page}]]</a>
+                    <a class="page-link" th:href="@{|/question/list/${page}/${order}/${sortType}|}">[[${page}]]</a>
                 </li>
                 <li class="page-item" th:classappend="${pagingNum > pagingList.totalPages - 5} ? 'disabled'">
-                    <a class="page-link" th:href="@{|/question/list/${pagingNum+5}/${order}|}">Next</a>
+                    <a class="page-link" th:href="@{|/question/list/${pagingNum+5}/${order}/${sortType}|}">Next</a>
                 </li>
             </ul>
         </nav>
