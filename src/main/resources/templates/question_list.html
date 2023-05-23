@@ -6,6 +6,16 @@
         <title>질문리스트</title>
     </th:block>
     <th:block layout:fragment="content">
+        <div class="dropdown d-flex justify-content-end">
+            <button class="btn btn-info btn-sm dropdown-toggle text-light mb-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                정렬
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
         <table class="table">
             <thead class="bg-info text-light">
             <tr>
