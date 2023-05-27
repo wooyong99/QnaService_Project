@@ -1,0 +1,27 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        layout:decorate="~{layout/layout}">
+  <th:block layout:fragment="title">
+    <title>회원가입</title>
+  </th:block>
+  <th:block layout:fragment="content">
+    <h2 class="mb-3 py-3 border-bottom">회원가입</h2>
+    <form th:action="@{/join}" method="post" th:object="${joinForm}">
+      <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+      <div class="mb-3">
+        <label class="form-label"><h5>UserName</h5></label>
+        <input type="text" name="username" class="form-control"  placeholder="UserName를 입력해주세요." th:filed="${username}"/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><h5>Password</h5></label>
+        <input type="password" name="password" class="form-control"  placeholder="Password를 입력해주세요." th:filed="${password}"/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"><h5>Email</h5></label>
+        <input type="email" name="email" placeholder="Email을 입력해주세요." class="form-control" th:filed="${email}"/>
+      </div>
+      <button type="submit" class="btn btn-info text-light">회원가입</button>
+      <button type="reset" class="btn btn-info text-light">로그인하러가기</button>
+    </form>
+  </th:block>

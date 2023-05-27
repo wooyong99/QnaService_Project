@@ -11,4 +11,6 @@ public class JoinForm {
     public String username;
     @NotBlank(message = "PASSWORD를 입력해주세요.")
     public String password;
+    @NotBlank(message = "Email을 입력해주세요.")
+    public String email;
 }
