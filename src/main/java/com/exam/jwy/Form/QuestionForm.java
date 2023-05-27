@@ -1,4 +1,4 @@
-package com.exam.jwy.Question;
+package com.exam.jwy.Form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

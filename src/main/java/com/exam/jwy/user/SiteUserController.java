@@ -1,8 +1,11 @@
 package com.exam.jwy.user;
 
+import com.exam.jwy.Form.JoinForm;
+import com.exam.jwy.Form.LoginForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,16 +21,27 @@ public class SiteUserController {
     }
 
     @PostMapping("/join")
-    public String doJoin(@Valid JoinForm joinForm, BindingResult bindingResult){
+    public String doJoin(Model model, @Valid JoinForm joinForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "joinForm";
         }
         SiteUser user = userService.create(joinForm);
+        model.addAttribute("user", user);
+        return "redirect:/question/list";
+    }
+    @GetMapping("/loginForm")
+    public String login(LoginForm loginForm){
+        return "loginForm";
+    }
+    @PostMapping("/login")
+    public String doLogin(@Valid JoinForm joinForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "loginForm";
+        }
         return "/";
     }
-
-    @GetMapping("/login")
-    public String login(){
-        return "login";
+    @GetMapping("/loginError")
+    public String loginerror(){
+        return "loginError";
     }
 }

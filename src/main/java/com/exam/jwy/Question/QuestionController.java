@@ -1,8 +1,9 @@
 package com.exam.jwy.Question;
 
 import com.exam.jwy.Answer.Answer;
-import com.exam.jwy.Answer.AnswerForm;
+import com.exam.jwy.Form.AnswerForm;
 import com.exam.jwy.Answer.AnswerService;
+import com.exam.jwy.Form.QuestionForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

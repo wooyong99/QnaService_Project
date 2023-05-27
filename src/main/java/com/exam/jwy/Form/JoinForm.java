@@ -1,4 +1,4 @@
-package com.exam.jwy.user;
+package com.exam.jwy.Form;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
