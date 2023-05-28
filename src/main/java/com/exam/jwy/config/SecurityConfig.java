@@ -34,6 +34,7 @@ public class SecurityConfig {
                     .loginProcessingUrl("/login")
                     .failureForwardUrl("/loginError")
                     .failureHandler(new CustomAuthFailureHandler())
+                    .successHandler(new CustomSuccessHandler())
                     .defaultSuccessUrl("/")
                 .and()
                     .logout()
