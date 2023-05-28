@@ -20,8 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SiteUser user = siteUserRepository.findByUsername(username)
                 .orElseThrow(() -> {
-                    System.out.println(siteUserRepository.findByUsername(username).isEmpty());
-                    throw new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다.:"+username);
+                    throw new UsernameNotFoundException("해당 %s를 찾을 수 없습니다. 다시 확인해주세요.".formatted(username));
                 });
         return new CustomDetails(user);
     }
