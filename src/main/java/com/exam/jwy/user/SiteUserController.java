@@ -33,13 +33,6 @@ public class SiteUserController {
     public String login(LoginForm loginForm){
         return "loginForm";
     }
-    @PostMapping("/login")
-    public String doLogin(@Valid JoinForm joinForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return "loginForm";
-        }
-        return "/";
-    }
     @GetMapping("/loginError")
     public String loginerror(){
         return "loginError";

@@ -2,6 +2,8 @@ package com.exam.jwy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +15,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+    @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+//        시큐리티 4.x버전부터는 disable()하지 않는 한 자동으로 활성화된다.
         http.csrf().disable();
         http.authorizeHttpRequests()
                 .requestMatchers(
@@ -24,11 +31,9 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                     .loginPage("/loginForm")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .loginProcessingUrl("/loginProc")
+                    .loginProcessingUrl("/login")
                     .failureForwardUrl("/loginError")
-                    .defaultSuccessUrl("/",true)
+                    .defaultSuccessUrl("/")
                 .and()
                     .logout()
                     .logoutUrl("/logout")
