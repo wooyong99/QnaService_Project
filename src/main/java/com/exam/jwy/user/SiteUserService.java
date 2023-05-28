@@ -20,5 +20,4 @@ public class SiteUserService {
         siteUserRepository.save(user);
         return user;
     }
-
 }

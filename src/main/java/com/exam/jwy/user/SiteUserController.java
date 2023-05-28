@@ -1,7 +1,8 @@
 package com.exam.jwy.user;
 
 import com.exam.jwy.Form.JoinForm;
-import com.exam.jwy.Form.LoginForm;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,20 +22,20 @@ public class SiteUserController {
     }
 
     @PostMapping("/join")
-    public String doJoin(Model model, @Valid JoinForm joinForm, BindingResult bindingResult){
+    public String doJoin(@Valid JoinForm joinForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "joinForm";
         }
         SiteUser user = userService.create(joinForm);
-        model.addAttribute("user", user);
         return "redirect:/question/list";
     }
     @GetMapping("/loginForm")
-    public String login(LoginForm loginForm){
+    public String login(){
         return "loginForm";
     }
-    @GetMapping("/loginError")
-    public String loginerror(){
-        return "loginError";
+    @PostMapping("/loginError")
+    public String loginerror(Model model, HttpServletRequest request, HttpServletResponse response){
+        model.addAttribute("errorMessage", request.getAttribute("errorMessage"));
+        return "loginForm";
     }
 }

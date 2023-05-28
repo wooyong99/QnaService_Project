@@ -18,10 +18,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     // UserDetails타입을 Authentication 내부에 return을해준다.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SiteUser user = siteUserRepository.findByUsername(username);
-        if(user != null) {
-            return new CustomDetails(user);
-        }
-        return null;
+        SiteUser user = siteUserRepository.findByUsername(username)
+                .orElseThrow(() -> {
+                    System.out.println(siteUserRepository.findByUsername(username).isEmpty());
+                    throw new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다.:"+username);
+                });
+        return new CustomDetails(user);
     }
 }
