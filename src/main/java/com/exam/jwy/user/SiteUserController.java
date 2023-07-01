@@ -26,6 +26,10 @@ public class SiteUserController {
         if(bindingResult.hasErrors()){
             return "joinForm";
         }
+        if(!joinForm.getPassword().equals(joinForm.getConfirm_password())){
+            bindingResult.rejectValue("confirm_password", "passwordIncorrect","2개의 패스워드가 일치하지 않습니다." );
+            return "joinForm";
+        }
         SiteUser user = userService.create(joinForm);
         return "redirect:/question/list";
     }
