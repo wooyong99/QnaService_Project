@@ -18,6 +18,7 @@ public class SiteUserService {
         user.setEmail(joinForm.getEmail());
         user.setRole("ROLE_USER");
         siteUserRepository.save(user);
+
         return user;
     }
 }

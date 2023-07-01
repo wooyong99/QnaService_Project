@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,13 @@ public class SiteUserController {
             bindingResult.rejectValue("confirm_password", "passwordIncorrect","2개의 패스워드가 일치하지 않습니다." );
             return "joinForm";
         }
-        SiteUser user = userService.create(joinForm);
+        try{
+            SiteUser user = userService.create(joinForm);
+        }catch(DataIntegrityViolationException e){
+            bindingResult.rejectValue("username","usernameDuplicate", "이미 존재하는 username입니다.");
+            return "joinForm";
+        }
+
         return "redirect:/question/list";
     }
     @GetMapping("/loginForm")

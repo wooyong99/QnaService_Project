@@ -11,19 +11,19 @@
       <div th:replace="~{form_errors :: formErrorsFragment}"></div>
       <div class="mb-3">
         <label class="form-label"><h5>UserName</h5></label>
-        <input type="text" name="username" class="form-control"  placeholder="UserName를 입력해주세요." th:filed="${username}"/>
+        <input type="text" name="username" class="form-control"  placeholder="UserName를 입력해주세요." th:filed="*{username}"/>
       </div>
       <div class="mb-3">
         <label class="form-label"><h5>Password</h5></label>
-        <input type="password" name="password" class="form-control"  placeholder="Password를 입력해주세요." th:filed="${password}"/>
+        <input type="password" name="password" class="form-control"  placeholder="Password를 입력해주세요." th:filed="*{password}"/>
       </div>
       <div class="mb-3">
         <label class="form-label"><h5>Confirm Password</h5></label>
-        <input type="password" name="confirm_password" class="form-control"  placeholder="Password 재입력해주세요." th:filed="${confirm_password}"/>
+        <input type="password" name="confirm_password" class="form-control"  placeholder="Password 재입력해주세요." th:filed="*{confirm_password}"/>
       </div>
       <div class="mb-3">
         <label class="form-label"><h5>Email</h5></label>
-        <input type="email" name="email" placeholder="Email을 입력해주세요." class="form-control" th:filed="${email}"/>
+        <input type="email" name="email" placeholder="Email을 입력해주세요." class="form-control" th:filed="*{email}"/>
       </div>
       <button type="submit" class="btn btn-info text-light">회원가입</button>
       <button type="reset" class="btn btn-info text-light">로그인하러가기</button>
