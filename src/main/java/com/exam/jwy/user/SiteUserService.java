@@ -1,7 +1,10 @@
 package com.exam.jwy.user;
 
+import com.exam.jwy.Exception.SignUpEmailException;
+import com.exam.jwy.Exception.SignUpUserNameException;
 import com.exam.jwy.Form.JoinForm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,19 @@ public class SiteUserService {
         user.setPassword(encPassword);
         user.setEmail(joinForm.getEmail());
         user.setRole("ROLE_USER");
-        siteUserRepository.save(user);
+        try{
+            siteUserRepository.save(user);
+        }catch (DataIntegrityViolationException e){
+            System.out.println(user.getUsername());
+            System.out.println(user.getEmail());
+            if(siteUserRepository.findByUsername(user.getUsername()).isPresent()){
+                throw new SignUpUserNameException("username");
+            }
+            if(siteUserRepository.findByEmail(user.getEmail()).isPresent()){
+                throw new SignUpEmailException("email");
+            }
+        }
+
 
         return user;
     }

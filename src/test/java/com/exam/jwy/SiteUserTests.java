@@ -11,6 +11,8 @@ public class SiteUserTests {
     SiteUserRepository siteUserRepository;
     @Test
     void test1(){
-        System.out.println(siteUserRepository.findByUsername("user").get().getUsername());
+
+        System.out.println(siteUserRepository.findByUsername("user").isEmpty());
+
     }
 }

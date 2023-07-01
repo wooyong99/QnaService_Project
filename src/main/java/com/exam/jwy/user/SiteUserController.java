@@ -1,11 +1,12 @@
 package com.exam.jwy.user;
 
+import com.exam.jwy.Exception.SignUpEmailException;
+import com.exam.jwy.Exception.SignUpUserNameException;
 import com.exam.jwy.Form.JoinForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,11 +34,13 @@ public class SiteUserController {
         }
         try{
             SiteUser user = userService.create(joinForm);
-        }catch(DataIntegrityViolationException e){
+        }catch(SignUpUserNameException e){
             bindingResult.rejectValue("username","usernameDuplicate", "이미 존재하는 username입니다.");
             return "joinForm";
+        }catch(SignUpEmailException e){
+            bindingResult.rejectValue("email","emailDuplicate", "이미 존재하는 Email입니다.");
+            return "joinForm";
         }
-
         return "redirect:/question/list";
     }
     @GetMapping("/loginForm")
