@@ -18,7 +18,7 @@ public class Question{
   private Integer id;
   @Column(length=200)
   private String subject;
-  @Column(columnDefinition = "TEXT")
+  @Column(columnDefinition = "LONGTEXT")
   private String content;
   private LocalDateTime createDate;
   @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
