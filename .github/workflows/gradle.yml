@@ -51,11 +51,11 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.4
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{secrets.SSH_PRIVATE_KEY }}
       - name: SCP transfer
-        run: scp *.jar ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:~/cicd
+        run: scp *.jar ${{secrets.SSH_USER }}@${{secrets.SERVER_IP}}:~/cicd
       - name: Execute remote commands
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo fuser -k 8080/tcp"
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo nohup java -jar ~/cicd/*.jar &"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SERVER_IP}} "sudo fuser -k 8080/tcp"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SERVER_IP}} "sudo nohup java -jar ~/cicd/*.jar &"
     
