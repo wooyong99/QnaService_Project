@@ -49,6 +49,10 @@ EC2는 외부로부터 들어오는 요청을 받아야하기 때문에 Public S
 
 ### ⭐️ 질문, 답변 CRUD
 - 유효성 검사 ( NULL, 빈 공백 )
+- 질문 등록 Sequence Diagram
+  <br>
+
+  ![질문등록다이어그램](https://github.com/wooyong99/QnaService_Project/assets/85385921/f40ebe9a-432c-4724-a07a-0307fc320068)
 
 ### ⭐️ 비회원 사용자 질문 작성 차단
 - 비회원 사용자 질문 작성 x / 답변 작성 o (익명)
