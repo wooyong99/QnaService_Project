@@ -1,13 +1,17 @@
 package com.exam.jwy.Question;
 
 import com.exam.jwy.Exception.DataNotFoundException;
+import com.exam.jwy.user.SiteUser;
+import com.exam.jwy.user.SiteUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,7 @@ import java.util.Optional;
 public class QuestionService {
   private final QuestionRepository questionRepository;
 
+  private final SiteUserRepository siteUserRepository;
   public List getList(){
     return questionRepository.findAll();
   }
@@ -26,12 +31,19 @@ public class QuestionService {
             .orElseThrow(() -> new DataNotFoundException("no %d question not found".formatted(id)));
   }
 
-  public void create(String subject, String content) {
+  public void create(String subject, String content, Principal principal) {
+    Optional<SiteUser> op = siteUserRepository.findByUsername(principal.getName());
+    SiteUser siteUser = null;
+    if(op.isEmpty()){
+      throw new UsernameNotFoundException("로그인 이용 후 사용해주세요.");
+    }else{
+      siteUser = op.get();
+    }
     Question question = new Question();
     question.setCreateDate(LocalDateTime.now());
     question.setContent(content);
     question.setSubject(subject);
-
+    siteUser.addQuestion(question);
     questionRepository.save(question);
   }
 

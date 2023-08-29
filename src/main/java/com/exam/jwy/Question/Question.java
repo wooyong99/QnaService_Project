@@ -1,6 +1,7 @@
 package com.exam.jwy.Question;
 
 import com.exam.jwy.Answer.Answer;
+import com.exam.jwy.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,8 @@ public class Question{
   private LocalDateTime createDate;
   @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
   private List<Answer> answerList = new ArrayList<>();
-
+  @ManyToOne
+  private SiteUser siteUser;
   public void addAnswer(Answer answer){
     answer.setQuestion(this);
     getAnswerList().add(answer);

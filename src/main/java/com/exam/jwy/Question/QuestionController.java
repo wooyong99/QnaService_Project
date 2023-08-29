@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,11 +67,11 @@ public class QuestionController {
       return "question_create";
     }
     @PostMapping("/question/doCreate")
-    public String doCreate(Model model, @Valid QuestionForm questionForm, BindingResult bindingResult){
+    public String doCreate(Model model, @Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal){
       if(bindingResult.hasErrors()){
         return "question_create";
       }
-      questionService.create(questionForm.subject, questionForm.content);
+      questionService.create(questionForm.subject, questionForm.content, principal);
       return "redirect:/question/list";
     }
     @GetMapping("/question/modify/{id}")
