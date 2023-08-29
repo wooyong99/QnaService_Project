@@ -7,7 +7,7 @@
 
 <br>
 
-# 🖥  Stacks 
+# ✔︎  Stacks 
 
 <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=OpenJDK&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-logo&logo=Spring Boot&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-logo&logo=MariaDB&logoColor=white"> <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-logo&logo=amazonaws&logoColor=white"> <img src="https://img.shields.io/badge/Gradle-02303A?style=flat&logo=Gradle&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat&logo=Spring Security&logoColor=white"/> 
 
@@ -27,7 +27,7 @@ Spring 프레임워크는 Java언어를 기반으로 애플리케이션을 개�
 
 <br>
 
-# 🖼️  Service Architecture
+# ✔︎  Service Architecture
 
 ![soa](https://github.com/wooyong99/QnaService_Project/assets/85385921/bf372888-c717-4f1d-b50c-220c4a0ae52f)
 
@@ -38,21 +38,33 @@ EC2는 외부로부터 들어오는 요청을 받아야하기 때문에 Public S
 
 <br>
 
-# 💡  Funtions
+# ✔︎  ERD
+
+![](https://github.com/wooyong99/QnaService_Project/assets/85385921/511127e0-cf21-4317-a03c-ca8a49297fef)
+
+
+<br>
+<br>
+
+# ✔︎  Funtions
 
 ### ⭐️ 회원가입 / 로그인
 - 유효성 검사 ( NULL, 빈 공백 ) / 이메일 형식
 - 회원가입 & 회원가입 Sequence Diagram
+
   <br>
   
-  ![ㅁㄴㅇ](https://github.com/wooyong99/QnaService_Project/assets/85385921/a7dd914b-5a1f-49fb-ac4c-af6fc24ad252)
+  ![](https://github.com/wooyong99/QnaService_Project/assets/85385921/10e921e6-7ae4-46fe-a8b1-d6d03c7b8753)
+
 
 ### ⭐️ 질문, 답변 CRUD
 - 유효성 검사 ( NULL, 빈 공백 )
 - 질문 등록 Sequence Diagram
-  <br>
 
-  ![질문등록다이어그램](https://github.com/wooyong99/QnaService_Project/assets/85385921/f40ebe9a-432c-4724-a07a-0307fc320068)
+  <br>
+  
+  ![무제](https://github.com/wooyong99/QnaService_Project/assets/85385921/63fcb005-eac1-4060-8f8e-b329dfa41a18)
+
 
 ### ⭐️ 비회원 사용자 질문 작성 차단
 - 비회원 사용자 질문 작성 x / 답변 작성 o (익명)
@@ -63,7 +75,7 @@ EC2는 외부로부터 들어오는 요청을 받아야하기 때문에 Public S
 
 <br>
 
-# ❗️ Issues
+# ✔︎  Issues
 
 #### 👉🏻 [Issue1](https://velog.io/@wooyong99/Spring-Boot-SpringBoot-Validation-%EC%82%AC%EC%9A%A9-%EC%8B%9C-%EC%9C%A0%EC%9D%98%EC%82%AC%ED%95%AD)
 ####  👉🏻[ Issue2](https://velog.io/@wooyong99/%EC%A7%88%EB%AC%B8-%EC%88%98%EC%A0%95-%EC%9C%A0%ED%9A%A8%EC%84%B1-%EC%B2%B4%ED%81%AC-%EC%9E%85%EB%A0%A5-%EA%B0%92-%EC%9C%A0%EC%A7%80-%EC%9D%B4%EC%8A%88-%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95)
