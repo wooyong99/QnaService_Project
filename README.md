@@ -42,6 +42,10 @@ EC2는 외부로부터 들어오는 요청을 받아야하기 때문에 Public S
 
 ### ⭐️ 회원가입 / 로그인
 - 유효성 검사 ( NULL, 빈 공백 ) / 이메일 형식
+- 회원가입 & 회원가입 Sequence Diagram
+  <br>
+  
+  ![ㅁㄴㅇ](https://github.com/wooyong99/QnaService_Project/assets/85385921/a7dd914b-5a1f-49fb-ac4c-af6fc24ad252)
 
 ### ⭐️ 질문, 답변 CRUD
 - 유효성 검사 ( NULL, 빈 공백 )
